@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <title>ポートフォリオ</title>
+</head>
+<body>
+
+
+
+  <div id="ham-menu">
+    <div class="container">
+      <div id="ham-menu-icon" @click="handleMenu">
+        <span class="ham-line ham-line1" v-if="!isMenuOpen"></span>
+        <span class="ham-line ham-line2" v-if="!isMenuOpen"></span>
+        <span class="ham-line ham-line3" v-if="!isMenuOpen"></span>
+
+        <span class="ham-line ham-cross1"  v-if="isMenuOpen"></span>
+        <span class="ham-line ham-cross2"  v-if="isMenuOpen"></span>
+
+      </div>
+  
+      <transition name="ham-menu" v-cloak>
+        <div id="ham-menu-contents" v-if="isMenuOpen" v-bind:class="{'ham-active': !isMenuOpen, 'ham-inactive': isMenuOpen}"> 
+          <ul>
+            <li><a href="#about-wrapper">About</a></li>
+            <li><a href="#works-wrapper">Works</a></li>
+            <li><a href="#contact-wrapper">Contact</a></li>
+          </ul>
+        </div>
+      </transition>
+
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <p id="page-title">portfolio</p>
+      <div id="header-menu">
+        <a href="#about-wrapper">About</a>
+        <a href="#works-wrapper">Works</a>
+        <a href="#contact-wrapper">Contact</a>
+
+      </div>
+    </div>
+  </header>
+
+  <div id="about-wrapper" name="about">
+    <div class="container">
+      <h1 class="header-title">About</h1>
+      <div class="wrap-content">
+        京都府在住の大学生によるポートフォリオサイトです。<br>
+        人の役に立つことの出来る機会を増やすためにプログラミング学習を始め、日々勉強中です。
+      </div>
+    </div>
+  </div>
+
+  <div id="works-wrapper">
+    <div class="container">
+      <h1 class="header-title">Works</h1>
+      <p class="workSupple">クリックで詳しい説明を表示します。</p>
+      <div class="wrap-content">
+
+        <div id="works">
+
+
+          <div class="work work-left">
+            <p class="work-img-wrapper" @click="clickedNumber=1; url='http://mdyscdoor.bitter.jp/forum/forum.php'; openModal();">
+              <img class="work-img" src="indexImg/forum.png" alt="掲示板の画像">
+            </p>
+
+            <p class="work-details">
+              掲示板(PHP, SQL)
+            </p>
+          </div>
+
+          <div class="work work-right">
+            <p class="work-img-wrapper" @click="clickedNumber=2; url='http://mdyscdoor.bitter.jp/rpt/rpt.html'; openModal();">
+              <img class="work-img" src="indexImg/RPT.png" alt="相対音感補助ツールの画像">
+            </p>
+
+            <p class="work-details">
+              相対音感補助ツール(Javascript)
+            </p>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <div id="modal-cover" v-if="isModalOpen" v-cloak>
+      <div id="modal">
+        <div id="modal-content">
+          <div id="modal-work1" class="modal-work" v-if="clickedNumber === 1">
+            <p class="closeModal"><span @click="closeModal">×</span></p>
+            <p class="usingLang">使用言語:PHP,SQL</p>
+
+            <div class="work-modal-details">
+              データベースと連携させた掲示板です。<br>
+              投稿・編集・削除機能、クッキーの書き込み機能のほか、<br>
+              文字数オーバーの対策やxss対策等行っています。
+            </div>
+          </div>
+
+          <div id="modal-work2" class="modal-work" v-if="clickedNumber === 2">
+            <p class="closeModal"><span @click="closeModal">×</span></p>
+            <p class="usingLang">使用言語:Javascript</p>
+
+            <div class="work-modal-details">
+              相対音感の育成を手助けするためのツールです。<br>
+              相対音感とは、絶対音感と違い誰でも身に着けられる音感であり、身に着けると曲を聞いてその曲のドレミが分かるようになって即興演奏ができるようになる等、とても有用な能力であるものの、自分を含む独学者にとっては情報に乏しく習得のハードルが高いと感じていたので、
+              既存のアプリを参考にさせて頂き、少しでも楽に音感を身に着けるためのゲームのようなツールがあればと思い作成しました。<br>
+              <br><br>
+              ゲームの基本的な流れとしては、ドレミファソラシドの中から、あらかじめ決めておいた音やランダムに生成した音を鳴らし、その音を予想して鍵盤で入力して当てるというもので、英単語を覚えるアプリ等に近いです。<br>
+              <br>
+              JavascriptによるDOMの操作、vue.jsを用いたモーダルの表示、ローカルストレージを用いたドレミのマイリスト登録・編集・削除機能が備わっています。
+            </div>
+          </div>
+
+        </div>
+        <div id="modal-btn">
+          <a :href="url">このアプリを開く</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="contact-wrapper">
+    <div class="container">
+      <h1 class="header-title">Contact</h1>
+      <div class="wrap-content">
+        mdyscdoor☆gmail.com (☆→@) <br>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+
+
+  </footer>
+
+
+
+
+  <script src="vue.min.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
